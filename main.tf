@@ -107,7 +107,7 @@ module "codepipeline_s3_policy_label" {
 resource "aws_iam_policy" "s3" {
   count  = "${local.enabled ? 1 : 0}"
   name   = "${module.codepipeline_s3_policy_label.id}"
-  policy = "${data.aws_iam_policy_document.s3.json}"
+  policy = "${data.aws_iam_policy_document.s3[0].json}"
 }
 
 data "aws_iam_policy_document" "s3" {
