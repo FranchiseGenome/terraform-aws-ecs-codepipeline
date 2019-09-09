@@ -172,7 +172,7 @@ data "aws_caller_identity" "default" {}
 data "aws_region" "default" {}
 
 module "build" {
-  source                = "git::https://github.com/cloudposse/terraform-aws-codebuild.git?ref=tags/0.16.0"
+  source                = "git::https://github.com/cloudposse/terraform-aws-codebuild.git?ref=master"
   enabled               = "${var.enabled}"
   namespace             = "${var.namespace}"
   name                  = "${var.name}"
