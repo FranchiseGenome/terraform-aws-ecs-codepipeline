@@ -90,8 +90,8 @@ data "aws_iam_policy_document" "default" {
 
 resource "aws_iam_role_policy_attachment" "s3" {
   count      = "${local.enabled ? 1 : 0}"
-  role       = "${aws_iam_role.default.id}"
-  policy_arn = "${aws_iam_policy.s3.arn}"
+  role       = "${aws_iam_role.default[0].id}"
+  policy_arn = "${aws_iam_policy.s3[0].arn}"
 }
 
 module "codepipeline_s3_policy_label" {
@@ -197,7 +197,7 @@ module "build" {
 resource "aws_iam_role_policy_attachment" "codebuild_s3" {
   count      = "${local.enabled ? 1 : 0}"
   role       = "${module.build.role_id}"
-  policy_arn = "${aws_iam_policy.s3.arn}"
+  policy_arn = "${aws_iam_policy.s3[0].arn}"
 }
 
 resource "aws_codepipeline" "source_build_deploy" {
