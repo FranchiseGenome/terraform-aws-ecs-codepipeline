@@ -55,8 +55,8 @@ data "aws_iam_policy_document" "assume" {
 
 resource "aws_iam_role_policy_attachment" "default" {
   count      = "${local.enabled ? 1 : 0}"
-  role       = "${aws_iam_role.default.id}"
-  policy_arn = "${aws_iam_policy.default.arn}"
+  role       = "${aws_iam_role.default[0].id}"
+  policy_arn = "${aws_iam_policy.default[0].arn}"
 }
 
 resource "aws_iam_policy" "default" {
@@ -124,8 +124,8 @@ data "aws_iam_policy_document" "s3" {
     ]
 
     resources = [
-      "${aws_s3_bucket.default.arn}",
-      "${aws_s3_bucket.default.arn}/*",
+      "${aws_s3_bucket.default[0].arn}",
+      "${aws_s3_bucket.default[0].arn}/*",
     ]
 
     effect = "Allow"
@@ -134,8 +134,8 @@ data "aws_iam_policy_document" "s3" {
 
 resource "aws_iam_role_policy_attachment" "codebuild" {
   count      = "${local.enabled ? 1 : 0}"
-  role       = "${aws_iam_role.default.id}"
-  policy_arn = "${aws_iam_policy.codebuild.arn}"
+  role       = "${aws_iam_role.default[0].id}"
+  policy_arn = "${aws_iam_policy.codebuild[0].arn}"
 }
 
 module "codebuild_label" {
