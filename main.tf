@@ -203,10 +203,10 @@ resource "aws_iam_role_policy_attachment" "codebuild_s3" {
 resource "aws_codepipeline" "source_build_deploy" {
   count    = "${local.enabled ? 1 : 0}"
   name     = "${module.codepipeline_label.id}"
-  role_arn = "${aws_iam_role.default.arn}"
+  role_arn = "${aws_iam_role.default[0].arn}"
 
   artifact_store {
-    location = "${aws_s3_bucket.default.bucket}"
+    location = "${aws_s3_bucket.default[0].bucket}"
     type     = "S3"
   }
 
